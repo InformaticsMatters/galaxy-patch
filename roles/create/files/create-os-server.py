@@ -119,7 +119,7 @@ def create(conn,
             return ServerResult(False, False, 0)
         network_info.append({'uuid': network.id})
 
-    # Security group objects
+    # Security group objects
     security_groups = [
         conn.compute.get_security_group_by_id('b0b0d22d-6820-4f86-92fa-2d61b2cac958'),
         conn.compute.get_security_group_by_id('55b12e1b-9ba6-4c3b-8bdf-d56a47797176'),
