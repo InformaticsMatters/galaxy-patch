@@ -121,9 +121,9 @@ def create(conn,
 
     # Security group objects
     security_groups = [
-        conn.network.find_security_group('default'),
-        conn.network.find_security_group('pulsar-egress-public'),
-        conn.network.find_security_group('pulsar-ingress-private')
+        conn.network.find_security_group('default').id,
+        conn.network.find_security_group('pulsar-egress-public').id,
+        conn.network.find_security_group('pulsar-ingress-private').id
     ]
 
     # Do nothing if the server appears to exist
