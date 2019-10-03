@@ -1,4 +1,5 @@
-# Galaxy Patch
+# Galaxy Patch
+
 Ansible playbook and roles to patch the Galaxy deployment
 
 1.  Cline onto a suitable *bastion* in the cluster
@@ -6,4 +7,3 @@ Ansible playbook and roles to patch the Galaxy deployment
 1.  Run the playbook with `ansible-playbook site.yaml`
 
 ---
-
