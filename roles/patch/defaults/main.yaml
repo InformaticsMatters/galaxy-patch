@@ -1,0 +1,4 @@
+---
+
+nfs_host: 192.168.199.9
+central_manager_host: 192.168.199.12

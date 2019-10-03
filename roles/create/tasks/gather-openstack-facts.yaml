@@ -1,0 +1,23 @@
+---
+
+- name: Assert key variables
+  assert:
+    that: os_auth_url is defined
+
+# Get information about the exec nodes
+# We simply want their IP addresses
+# so we can add them to the 'servers' inventory group
+
+- name: Get exec node facts
+  os_server_facts:
+    auth: "{{ os_auth }}"
+    region_name: "{{ os_region_name }}"
+    server: "{{ exec_base_name }}*"
+
+- name: Adjust exec node group
+  add_host:
+    groups: exec
+    name: "{{ item.private_v4 }}"
+  loop: "{{ openstack_servers }}"
+  no_log: yes
+  changed_when: false

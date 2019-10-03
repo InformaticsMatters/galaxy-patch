@@ -1,0 +1,6 @@
+---
+
+- include_tasks: create-{{ provider }}-instances.yaml
+  when: create_exec_instances|bool
+
+- include_tasks: gather-{{ provider }}-facts.yaml

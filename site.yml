@@ -1,0 +1,12 @@
+---
+
+- hosts: localhost
+  tasks:
+  - include_role:
+      name: create
+
+- hosts: exec
+  become: yes
+  gather_facts: no
+  - include_role:
+      name: patch

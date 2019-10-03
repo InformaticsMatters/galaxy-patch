@@ -1,0 +1,12 @@
+**/*.key
+**/site*.sh
+**/*.log
+**/*.retry
+**/*.swp
+**/vault-pass.txt
+
+connect.sh
+parameters
+*.pub
+
+.idea/
