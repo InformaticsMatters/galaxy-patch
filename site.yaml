@@ -8,5 +8,6 @@
 - hosts: exec
   become: yes
   gather_facts: no
+  tasks:
   - include_role:
       name: patch
