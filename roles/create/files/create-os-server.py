@@ -119,6 +119,13 @@ def create(conn,
             return ServerResult(False, False, 0)
         network_info.append({'uuid': network.id})
 
+    # Security group objects
+    security_groups = [
+        conn.compute.get_security_group_by_id('b0b0d22d-6820-4f86-92fa-2d61b2cac958'),
+        conn.compute.get_security_group_by_id('55b12e1b-9ba6-4c3b-8bdf-d56a47797176'),
+        conn.compute.get_security_group_by_id('8c482ddf-5d5a-426e-b91c-2c8ead088431')
+    ]
+
     # Do nothing if the server appears to exist
     if conn.get_server(name_or_id=server_name):
         # Yes!
@@ -144,9 +151,7 @@ def create(conn,
                                                 flavor_id=flavour.id,
                                                 key_name=keypair_name,
                                                 networks=network_info,
-                                                security_groups=['b0b0d22d-6820-4f86-92fa-2d61b2cac958',
-                                                                 '55b12e1b-9ba6-4c3b-8bdf-d56a47797176',
-                                                                 '8c482ddf-5d5a-426e-b91c-2c8ead088431'],
+                                                security_groups=security_groups,
                                                 wait=True)
         except openstack.exceptions.HttpException as ex:
             # Something wrong creating the server.
