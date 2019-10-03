@@ -144,9 +144,9 @@ def create(conn,
                                                 flavor_id=flavour.id,
                                                 key_name=keypair_name,
                                                 networks=network_info,
-                                                security_groups=['default',
-                                                                 'pulsar-egress-public',
-                                                                 'pulsar-ingress-private'],
+                                                security_groups=['b0b0d22d-6820-4f86-92fa-2d61b2cac958',
+                                                                 '55b12e1b-9ba6-4c3b-8bdf-d56a47797176',
+                                                                 '8c482ddf-5d5a-426e-b91c-2c8ead088431'],
                                                 wait=True)
         except openstack.exceptions.HttpException as ex:
             # Something wrong creating the server.
@@ -288,7 +288,7 @@ num_server_consecutive_failures = 0
 num_server_create_failures = 0
 failed_workers = []
 for i in range(ARGS.offset, ARGS.offset + ARGS.count):
-    name = ARGS.name if ARGS.count == 1 else '{}-{}{}'.format(ARGS.name, i, ARGS.suffix)
+    name = '{}-{}{}'.format(ARGS.name, i, ARGS.suffix)
     server_result = create(connection, name,
                            ARGS.image, ARGS.flavour, ARGS.network, ARGS.ips,
                            ARGS.keypair,
