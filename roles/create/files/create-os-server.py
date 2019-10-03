@@ -121,9 +121,9 @@ def create(conn,
 
     # Security group objects
     security_groups = [
-        conn.compute.get_security_group_by_id('b0b0d22d-6820-4f86-92fa-2d61b2cac958'),
-        conn.compute.get_security_group_by_id('55b12e1b-9ba6-4c3b-8bdf-d56a47797176'),
-        conn.compute.get_security_group_by_id('8c482ddf-5d5a-426e-b91c-2c8ead088431')
+        conn.compute.get_security_group('b0b0d22d-6820-4f86-92fa-2d61b2cac958'),
+        conn.compute.get_security_group('55b12e1b-9ba6-4c3b-8bdf-d56a47797176'),
+        conn.compute.get_security_group('8c482ddf-5d5a-426e-b91c-2c8ead088431')
     ]
 
     # Do nothing if the server appears to exist
