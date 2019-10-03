@@ -2,9 +2,10 @@
 
 provider: openstack
 
-exec_base_name: pulsar-exec-node-
+exec_base_name: pulsar-exec-node
 exec_type: l1.6xl
 exec_image_name: vggp-v31-j124
+exec_network: pulsar-private
 exec_count: 25
 exec_offset: 5
 
