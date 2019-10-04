@@ -73,6 +73,7 @@ def create(conn,
            flavour_name,
            network_name,
            ips,
+           sgs,
            keypair_name,
            attempts,
            retry_delay_s,
@@ -92,13 +93,13 @@ def create(conn,
     :param flavour_name: The server flavour (type), i.e. 'c2.large'
     :param network_name: The (optional) network name, or None
     :param ips: A (possibly empty) list of IPs to assign to the server
+    :param sgs: A (possibly empty) list of Security groups to assign to the server
     :param keypair_name: The OpenStack SSH key-pair to use (this must exist)
     :param attempts: The number of create attempts. If the server fails
                      this function uses this value to decide whether to try
                      ans create it.
     :param retry_delay_s: The delay between creation attempts.
     :param wait_time_s: The maximum period to wait (for creation or deletion).
-    :param security_groups: Optional security group names.
     :param verbose: Generate helpful progress.
     :returns: False on failure
     """
@@ -120,11 +121,9 @@ def create(conn,
         network_info.append({'uuid': network.id})
 
     # Security group objects
-    security_groups = [
-        str(conn.network.find_security_group('default').id),
-        str(conn.network.find_security_group('pulsar-egress-public').id),
-        str(conn.network.find_security_group('pulsar-ingress-private').id)
-    ]
+    security_groups =[]
+    for sg in sgs:
+        security_groups.append(conn.network.find_security_group(sg).id)
 
     # Do nothing if the server appears to exist
     if conn.get_server(name_or_id=server_name):
@@ -151,7 +150,6 @@ def create(conn,
                                                 flavor_id=flavour.id,
                                                 key_name=keypair_name,
                                                 networks=network_info,
-                                                security_groups=security_groups,
                                                 wait=True)
         except openstack.exceptions.HttpException as ex:
             # Something wrong creating the server.
@@ -169,8 +167,12 @@ def create(conn,
         try:
             new_server = conn.compute.wait_for_server(server,
                                                       wait=wait_time_s)
+            # Successful server if we get here.
+            # Add any required IPs and security groups.
             if ips:
                 conn.add_ip_list(new_server, ips)
+            if security_groups:
+                conn.add_server_security_groups(new_server, security_groups)
         except openstack.exceptions.ResourceFailure as rf_e:
             print('ERROR: ResourceFailure ({})'.format(server_name))
             print('{}'.format(rf_e))
@@ -247,6 +249,10 @@ PARSER.add_argument('-s', '--ips',
                     default=[],
                     help='IPs to assign to the server.'
                          ' Only valid if --count is unused or "1"')
+PARSER.add_argument('-g', '--sgs',
+                    nargs='+',
+                    default=[],
+                    help='Security Group Names to assign to the server.')
 
 # Defaults...
 PARSER.add_argument('-a', '--attempts',
@@ -295,7 +301,8 @@ failed_workers = []
 for i in range(ARGS.offset, ARGS.offset + ARGS.count):
     name = '{}-{}{}'.format(ARGS.name, i, ARGS.suffix)
     server_result = create(connection, name,
-                           ARGS.image, ARGS.flavour, ARGS.network, ARGS.ips,
+                           ARGS.image, ARGS.flavour, ARGS.network,
+                           ARGS.ips, ARGS.sgs,
                            ARGS.keypair,
                            ARGS.attempts, ARGS.retry_delay, ARGS.wait_time,
                            ARGS.verbose)

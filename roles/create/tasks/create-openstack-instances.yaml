@@ -30,6 +30,7 @@
     --count {{ exec_count }}
     --offset {{ exec_offset }}
     --suffix .xchem
+    --sgs default pulsar-egress-public pulsar-ingress-private
     --verbose
   environment:
     OS_AUTH_URL: "{{ os_auth_url }}"
