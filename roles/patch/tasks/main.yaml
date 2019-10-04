@@ -1,3 +1,28 @@
 ---
 
-- include_tasks: patch-instances.yaml
+- name: Set condor_config.local
+  template:
+    src: condor_config.local.j2
+    dest: /etc/condor/condor_config.local
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart services
+
+- name: Set data.autofs
+  template:
+    src: data.autofs.j2
+    dest: /etc/auto.master.d/data.autofs
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart services
+
+- name: Set auto.data
+  template:
+    src: auto.data.j2
+    dest: /etc/auto.data
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart services

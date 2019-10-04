@@ -1,0 +1,10 @@
+---
+
+- name: Restart services
+  service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+  - nfs-server
+  - autofs
+  - condor
