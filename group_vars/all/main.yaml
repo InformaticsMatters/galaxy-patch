@@ -1,5 +1,7 @@
 ---
 
+ansible_user: centos
+
 provider: openstack
 
 exec_base_name: pulsar-exec-node
