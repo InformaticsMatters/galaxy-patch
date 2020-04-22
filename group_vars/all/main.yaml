@@ -4,12 +4,12 @@ ansible_user: centos
 
 provider: openstack
 
-exec_base_name: pulsar-exec-node
-exec_type: c2.xlarge
-exec_image_name: vggp-v31-j124
+exec_base_name: pulsar-exec-node-gpu
+exec_type: g-v100.small
+exec_image_name: vggp-v31-j138
 exec_network: pulsar-private
-exec_count: 100
-exec_offset: 5
+exec_count: 8
+exec_offset: 6
 
 create_exec_instances: no
 
