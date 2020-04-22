@@ -75,6 +75,7 @@ def create(conn,
            ips,
            sgs,
            keypair_name,
+           userdata,
            attempts,
            retry_delay_s,
            wait_time_s,
@@ -95,6 +96,7 @@ def create(conn,
     :param ips: A (possibly empty) list of IPs to assign to the server
     :param sgs: A (possibly empty) list of Security groups to assign to the server
     :param keypair_name: The OpenStack SSH key-pair to use (this must exist)
+    :param userdata: The OpenStack instance user data
     :param attempts: The number of create attempts. If the server fails
                      this function uses this value to decide whether to try
                      ans create it.
@@ -119,6 +121,10 @@ def create(conn,
             print('Unknown network ({})'.format(network_name))
             return ServerResult(False, False, 0)
         network_info.append({'uuid': network.id})
+    # User data?
+    instance_userdata = None
+    if userdata and not userdata in ['-']:
+        instance_userdata = userdata
 
     # Security group objects
     security_groups =[]
@@ -149,6 +155,7 @@ def create(conn,
                                                 image_id=image.id,
                                                 flavor_id=flavour.id,
                                                 key_name=keypair_name,
+                                                userdata=instance_userdata,
                                                 networks=network_info,
                                                 wait=True)
         except openstack.exceptions.HttpException as ex:
@@ -238,6 +245,9 @@ PARSER.add_argument('-p', '--keypair',
                     help='The OpenStack keypair,'
                          ' which must exist in your OpenStack account',
                     required=True)
+PARSER.add_argument('-u', '--userdata',
+                    help='The OpenStack userdata (a string) or "-"',
+                    required=True)
 
 # Optional...
 PARSER.add_argument('-k', '--network',
@@ -303,7 +313,7 @@ for i in range(ARGS.offset, ARGS.offset + ARGS.count):
     server_result = create(connection, name,
                            ARGS.image, ARGS.flavour, ARGS.network,
                            ARGS.ips, ARGS.sgs,
-                           ARGS.keypair,
+                           ARGS.keypair, ARGS.userdata,
                            ARGS.attempts, ARGS.retry_delay, ARGS.wait_time,
                            ARGS.verbose)
     if not server_result.success:
