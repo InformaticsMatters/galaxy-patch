@@ -29,7 +29,7 @@
     --flavour {{ exec_type }}
     --image {{ exec_image_name }}
     --keypair pulsar-cloud_key
-    --userdata {{ exec_userdata }}
+    --userdata "{{ exec_userdata }}"
     --network {{ exec_network }}
     --wait-time {{ os_server_wait_time_s }}
     --count {{ exec_count }}
