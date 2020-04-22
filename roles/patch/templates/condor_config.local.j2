@@ -21,7 +21,7 @@ SLOT_TYPE_1_PARTITIONABLE = True
 ALLOW_PSLOT_PREEMPTION = False
 STARTD.PROPORTIONAL_SWAP_ASSIGNMENT = True
 
-{% if gpu_node is defined and gpu_node %}
+{% if exec_is_gpu|bool %}
 # Advertise the GPUs
 use feature : GPUs
 GPU_DISCOVERY_EXTRA = -extra
