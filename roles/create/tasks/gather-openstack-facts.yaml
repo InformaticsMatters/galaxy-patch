@@ -13,7 +13,7 @@
   os_server_facts:
     auth: "{{ os_auth }}"
     region_name: "{{ os_region_name }}"
-    server: "{{ exec_base_name }}[0-9]*"
+    server: "{{ exec_base_name }}[1-9]*"
 
 - name: Adjust exec node group
   add_host:
