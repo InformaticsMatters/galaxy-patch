@@ -5,7 +5,7 @@
     that: os_auth_url is defined
 
 # Get information about the exec nodes.
-# Nodes gathered must begin with "{{ exec_base_name }}[0-9]"
+# Nodes gathered must begin with "{{ exec_base_name }}-[1-9]"
 # We simply want their IP addresses
 # so we can add them to the 'servers' inventory group
 
@@ -13,7 +13,7 @@
   os_server_facts:
     auth: "{{ os_auth }}"
     region_name: "{{ os_region_name }}"
-    server: "{{ exec_base_name }}[1-9]*"
+    server: "{{ exec_base_name }}-[1-9]*"
 
 - name: Adjust exec node group
   add_host:
