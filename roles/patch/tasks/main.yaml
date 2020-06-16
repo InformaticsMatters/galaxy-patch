@@ -4,7 +4,9 @@
   package:
     name: "{{ cuda_package }}"
     state: present
-  when: exec_is_gpu|bool
+  when:
+  - exec_is_gpu|bool
+  - install_gpu_cuda|bool
 
 - name: Set condor_config.local
   template:

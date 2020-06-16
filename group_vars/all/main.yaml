@@ -12,6 +12,7 @@ exec_count: 8
 exec_offset: 6
 exec_userdata: '-'
 exec_is_gpu: no
+install_gpu_cuda: no
 
 create_exec_instances: no
 
