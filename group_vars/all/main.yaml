@@ -18,6 +18,9 @@ exec_type: le2.large
 # Non-GPU: vggp-v31-j124
 exec_image_name: vggp-v31-j124
 # Create them?
+# If not the playbook simply gathers details
+# of those that have been created.
+# This is useful when patching existing machines.
 create_exec_instances: no
 # Do the instances contain GPUs?
 # And should we install CUDA?
