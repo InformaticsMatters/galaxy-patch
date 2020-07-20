@@ -1,5 +1,9 @@
 ---
 
+- name: Display exec node name
+  debug:
+    msg: exec_base_name={{ exec_base_name }} create_exec_instances={{ create_exec_instances }}
+
 - include_tasks: create-{{ provider }}-instances.yaml
   when: create_exec_instances|bool
 
