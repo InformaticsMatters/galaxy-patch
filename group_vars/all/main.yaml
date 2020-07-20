@@ -4,17 +4,28 @@ ansible_user: centos
 
 provider: openstack
 
-exec_base_name: pulsar-exec-node-gpu
-exec_type: g-v100.small
-exec_image_name: vggp-v31-j138
-exec_network: pulsar-private
-exec_count: 8
-exec_offset: 6
-exec_userdata: '-'
+# Basename for nodes
+# They will be called {{ exec_base_name ))-<N>
+# where 'N' starts at {{ exec_offset }}
+# until {{ exec_offset + exec_count - 1 }}
+exec_base_name: pulsar-exec-node-b
+exec_count: 20
+exec_offset: 100
+# The instance type/flavour
+exec_type: le2.large
+# Image name
+# GPU:     vggp-v31-j138
+# Non-GPU: vggp-v31-j124
+exec_image_name: vggp-v31-j124
+# Create them?
+create_exec_instances: no
+# Do the instances contain GPUs?
+# And should we install CUDA?
 exec_is_gpu: no
 install_gpu_cuda: no
 
-create_exec_instances: no
+exec_network: pulsar-private
+exec_userdata: '-'
 
 os_auth_url: "{{ lookup('env', 'OS_AUTH_URL') }}"
 os_project_id: "{{ lookup('env', 'OS_PROJECT_ID') }}"
