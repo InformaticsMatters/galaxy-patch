@@ -21,6 +21,14 @@ exec_image_name: vggp-v31-j124
 # If not the playbook simply gathers details
 # of those that have been created.
 # This is useful when patching existing machines.
+#
+# Typical create-and-patch pattern is as follows: -
+#
+# You try and create 20 instances but it fails after 15.
+# So you delete any failed instances form the OpenStack console
+# re-run the playbook after setting 'create_exec_instances' to 'no'.
+# The playbook, in this "second run", simply 'queries' for instances
+# and continues to patch using th instances it has found.
 create_exec_instances: no
 # Do the instances contain GPUs?
 # And should we install CUDA?
