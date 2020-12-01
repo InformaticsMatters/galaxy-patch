@@ -38,6 +38,8 @@ prompts you for your username and password) and run the playbook with: -
     $ ansible-playbook site.yaml -e @parameters.yaml
 
 >   You may need to run the playbook a number of times - especially if your
-    instances have different base names.
+    instances have different base names. At the time of writing we have
+    used `pulsar-exec-node`, `pulsar-exec-node-b`, `pulsar-exec-node-gpu` and
+    `pulsar-exec-node-gpu-b` as a base-name for our instances.
 
 ---
