@@ -9,14 +9,7 @@ provider: openstack
 # where 'N' starts at {{ exec_offset }}
 # until {{ exec_offset + exec_count - 1 }}
 exec_base_name: pulsar-exec-node-b
-exec_count: 20
-exec_offset: 100
-# The instance type/flavour
-exec_type: le2.large
-# Image name
-# GPU:     vggp-v31-j138
-# Non-GPU: vggp-v31-j124
-exec_image_name: vggp-v31-j124
+
 # Create them?
 # If not the playbook simply gathers details
 # of those that have been created.
@@ -30,14 +23,31 @@ exec_image_name: vggp-v31-j124
 # The playbook, in this "second run", simply 'queries' for instances
 # and continues to patch using th instances it has found.
 create_exec_instances: no
+
+# The following block is only used if creating instances.
+# If you;re not creating instances (and are just 'patching' existing ones)
+# the following does not matter.
+#
+# Number of instances and their numeric offset.
+exec_count: 20
+exec_offset: 100
+# The instance type/flavour
+exec_type: le2.large
+# Image name
+# GPU:     vggp-v31-j138
+# Non-GPU: vggp-v31-j124
+exec_image_name: vggp-v31-j124
 # Do the instances contain GPUs?
 # And should we install CUDA?
 exec_is_gpu: no
 install_gpu_cuda: no
-
+# Instance network
 exec_network: pulsar-private
+# Instances additional user data (initialisation commands)
 exec_userdata: '-'
 
+# Openstack variables
+# (all expected via standard environment variables)
 os_auth_url: "{{ lookup('env', 'OS_AUTH_URL') }}"
 os_project_id: "{{ lookup('env', 'OS_PROJECT_ID') }}"
 os_username: "{{ lookup('env', 'OS_USERNAME') }}"
