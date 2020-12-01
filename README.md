@@ -6,7 +6,9 @@ This code (two Ansible roles and a `site.yaml`) are used to *increase* the size
 of an existing Galaxy/Condor cluster. It simply creates `exec` instances
 and then *patches* them by: -
 
-1.  Templating `auto.data`
+1.  Templating `auto.data`. **Importantly** The NFS exports must already be
+    available - this play does not setup the NFS server's devices, mounts or
+    exports
 2.  Templating `condor_config.local`
 3.  Templating `data.autofs`
 4.  Restarting the `nfs`, `autofs` and `condor` services
