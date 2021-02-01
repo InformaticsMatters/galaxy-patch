@@ -39,10 +39,23 @@ prompts you for your username and password) and run the playbook with: -
     [...]
     $ ansible-playbook site.yaml -e @parameters.yaml
 
+or, for all our current machine directly, using the command-line: -
+
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-b
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-gpu
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-gpu-b
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-submit-machine
+
 >   You may need to run the playbook a number of times - especially if your
     instances have different base names. At the time of writing we have
     used `pulsar-exec-node`, `pulsar-exec-node-b`, `pulsar-exec-node-gpu`,
     `pulsar-exec-node-gpu-b` and `pulsar-submit-machine` as a base-names
     for our instances.
+
+>   The machines that match your chosen `exec_base_name`
+    are expected to be named `<exec_base_name>-[0-9]*`. If the machine names
+    do not match no machines will be placed in the inventory and nothing
+    will be run.
 
 ---
