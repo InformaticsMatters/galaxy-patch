@@ -10,9 +10,10 @@
   block:
 
   - name: Install nvida Docker repo
-    shell: >-
-      curl https://nvidia.github.io/nvidia-docker/centos7/nvidia-docker.repo >
-        /etc/yum.repos.d/nvidia-docker.repo
+    shell: curl {{ src }} > {{ dst }}
+    vars:
+      src: https://nvidia.github.io/nvidia-docker/centos7/nvidia-docker.repo
+      dst: /etc/yum.repos.d/nvidia-docker.repo
 
   - name: Install cuda
     package:
