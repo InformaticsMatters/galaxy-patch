@@ -36,7 +36,7 @@ exec_type: le2.large
 # Image name
 # GPU:     vggp-v31-j138
 # Non-GPU: vggp-v31-j124
-exec_image_name: vggp-v31-j124
+exec_image_name: vggp-v31-j138
 # Do the instances contain GPUs?
 # And should we install CUDA?
 exec_is_gpu: no

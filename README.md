@@ -32,11 +32,19 @@ and then *patches* them by: -
 3.  Inspect the templates to ensure they reflect your needs
     (specifically the mounts in `auto.data.j2`)
 
+Normally run from the DLS bastion as `mauro`: -
+
+    $ sudo -iu mauro
+    $ cd galaxy-patch
+    $ git pull
+
 Set your keystone environment variables (here we're using a script that 
-prompts you for your username and password) and run the playbook with: -
+prompts you for your username and password), check the parameters,
+and run the playbook with: -
  
     $ source ~/keystone_v3_for_anyone.sh
     [...]
+    [check parameters.yaml] 
     $ ansible-playbook site.yaml -e @parameters.yaml
 
 or, for all our current machine directly, using the command-line: -
