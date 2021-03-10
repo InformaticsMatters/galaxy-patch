@@ -5,9 +5,15 @@
   - include_role:
       name: create
 
+# The 'free' strategy allows each host to process the playbook tasks
+# at their own pace. The default 'linear' strategy means that the tasks
+# progress at the same pace across all nodes - with the pace controlled
+# by the slowest. i.e. no node can move past the 'Update all packages'
+# tasks until all hosts have finished that task.
 - hosts: exec
   become: yes
   gather_facts: no
+  strategy: free
   tasks:
   - include_role:
       name: patch
