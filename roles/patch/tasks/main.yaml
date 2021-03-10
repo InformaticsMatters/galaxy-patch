@@ -1,9 +1,30 @@
 ---
 
-- name: Install cuda
-  package:
-    name: "{{ cuda_package }}"
-    state: present
+- name: Update all packages
+  yum:
+    name: "*"
+    state: latest
+    update_cache: yes
+
+- name: Install GPU/CUDA Material
+  block:
+
+  - name: Install nvida Docker repo
+    shell: >-
+      curl https://nvidia.github.io/nvidia-docker/centos7/nvidia-docker.repo >
+        /etc/yum.repos.d/nvidia-docker.repo
+
+  - name: Install cuda
+    package:
+      name: "{{ item }}"
+      state: present
+    loop:
+    - cuda-11-2
+    - nvidia-container-toolkit
+
+  - name: Run Nvidia container test
+    command: docker run --gpus all nvidia/cuda:11.0-base nvidia-smi
+
   when:
   - exec_is_gpu|bool
   - install_gpu_cuda|bool
