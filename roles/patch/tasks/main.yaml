@@ -18,7 +18,7 @@
     vars:
       src: https://nvidia.github.io/nvidia-docker/centos7/nvidia-docker.repo
       dst: /etc/yum.repos.d/nvidia-docker.repo
-    warn: no
+      warn: no
 
   - name: Install cuda
     package:
