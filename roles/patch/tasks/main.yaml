@@ -9,7 +9,7 @@
 - name: Install GPU/CUDA Material
   block:
 
-  - name: Install nvida Docker repo
+  - name: Install Nvidia Docker repo
     shell: curl {{ src }} > {{ dst }}
     vars:
       src: https://nvidia.github.io/nvidia-docker/centos7/nvidia-docker.repo
