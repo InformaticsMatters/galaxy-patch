@@ -25,7 +25,7 @@
       name: "{{ item }}"
       state: present
     loop:
-    - cuda-11-2
+    - cuda-10-1
     - nvidia-container-toolkit
 
   - name: Run Nvidia container test
