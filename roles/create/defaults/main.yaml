@@ -1,4 +1,4 @@
 ---
 
-# Time to wait for a server...
-os_server_wait_time_s: 300
+# Time to wait for a server (15 minutes)...
+os_server_wait_time_s: 900
