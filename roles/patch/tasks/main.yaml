@@ -4,11 +4,11 @@
   wait_for_connection:
     timeout: 300
 
-- name: Update all packages
-  yum:
-    name: "*"
-    state: latest
-    update_cache: yes
+#- name: Update all packages
+#  yum:
+#    name: "*"
+#    state: latest
+#    update_cache: yes
 
 - name: Install GPU/CUDA Material
   block:

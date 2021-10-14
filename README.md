@@ -50,9 +50,16 @@ and run the playbook with: -
 or, for all our current machine directly, using the command-line: -
 
     $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-a
     $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-b
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-gpu
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-gpu-b
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-c
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-d
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-e
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-a
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-b
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-x4
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-x2
     $ ansible-playbook site.yaml -e exec_base_name=pulsar-submit-machine
 
 >   You may need to run the playbook a number of times - especially if your
