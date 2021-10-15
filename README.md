@@ -47,21 +47,6 @@ and run the playbook with: -
     [check parameters.yaml] 
     $ ansible-playbook site.yaml -e @parameters.yaml
 
-or, for all our current machine directly, using the command-line: -
-
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-a
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-b
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-c
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-d
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-e
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-a
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-b
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-x4
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-x2
-    $ ansible-playbook site.yaml -e exec_base_name=pulsar-submit-machine
-
 >   You may need to run the playbook a number of times - especially if your
     instances have different base names. At the time of writing we have
     used `pulsar-exec-node`, `pulsar-exec-node-b`, `pulsar-exec-node-gpu`,
@@ -72,5 +57,23 @@ or, for all our current machine directly, using the command-line: -
     are expected to be named `<exec_base_name>-[0-9]*`. If the machine names
     do not match no machines will be placed in the inventory and nothing
     will be run.
+
+For all our current machine, using the command-line for non-GPU nodes: -
+
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node -e exec_is_gpu=no
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-a -e exec_is_gpu=no
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-b -e exec_is_gpu=no
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-c -e exec_is_gpu=no
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-d -e exec_is_gpu=no
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-e -e exec_is_gpu=no
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-submit-machine -e exec_is_gpu=no
+
+and for GPU nodes: -
+
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda -e exec_is_gpu=yes
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-a -e exec_is_gpu=yes
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-b -e exec_is_gpu=yes
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-x4 -e exec_is_gpu=yes
+    $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-cuda-x2 -e exec_is_gpu=yes
 
 ---
