@@ -55,10 +55,10 @@ and run the playbook with: -
 
 >   The machines that match your chosen `exec_base_name`
     are expected to be named `<exec_base_name>-[0-9]*`. If the machine names
-    do not match no machines will be placed in the inventory and nothing
+    do not match, no machines will be placed in the inventory and nothing
     will be run.
 
-For all our current machine, using the command-line for non-GPU nodes: -
+For all our current machines, using the command-line for non-GPU nodes: -
 
     $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node -e exec_is_gpu=no
     $ ansible-playbook site.yaml -e exec_base_name=pulsar-exec-node-a -e exec_is_gpu=no
